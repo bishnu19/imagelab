@@ -1,19 +1,21 @@
 package imagelab;
-
+import java.awt.*;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
+import static org.junit.Assert.assertTrue;
 public class DisPanelTest {
+    public DisPanel testPanel;
     /**
      * Sets up the test fixture.
      * (Called before every test case method.)
      */
     @Before
     public void setUp() {
-        testPanel = new DispPanel(mandel.jpg);
+        Toolkit toolkit;
+        toolkit = Toolkit.getDefaultToolkit();
+        Image image = toolkit.getImage("mandel.gif");
+        testPanel = new DisPanel(image);
     }
 
     /**
@@ -25,19 +27,22 @@ public class DisPanelTest {
     }
 
     @Test
-    public void imageConstructorTypeTest(){
-        assertTrue(testPanel.img instanceof Image);
+    public void imageConstructorTypeTest(DisPanel panel){
+        assertTrue(testPanel instanceof DisPanel);
     }
 
     @Test
-    public void paintTest(){
-        assertTrue(testPanel.g instanceof Graphics);
+    public void newImageTest() {
+        Toolkit toolkit;
+        toolkit = Toolkit.getDefaultToolkit();
+        Image image = toolkit.getImage("mandel.gif");
+        DisPanel testPanel;
+        testPanel = new DisPanel(image);
+        assertTrue(testPanel.img instanceof Image);
+        Image imageTwo = toolkit.getImage("AHEC.jpg");
+        testPanel.newImage(imageTwo);
         assertTrue(testPanel.img instanceof Image);
     }
 
-    @Test
-    public void newImageTypeTest(){
-        testPanel.newImage(hiroshige.gif);
-        assertTrue(testPanel.img instance of Image);
-    }
+
 }
